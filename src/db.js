@@ -86,7 +86,7 @@ const brandList = [
 ];
 
 // Get content from file
-const filePath = process.cwd() + "\\src/db.json";
+const filePath = process.cwd() + "//src/db.json";
 var contents = fs.readFileSync(filePath);
 // Define to JSON type
 var jsonContent = JSON.parse(contents);
