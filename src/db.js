@@ -1,4 +1,5 @@
 const { faker } = require("@faker-js/faker");
+const fs = require("fs");
 
 // sample brand list
 const brandList = [
@@ -84,10 +85,14 @@ const brandList = [
   },
 ];
 
-module.exports = () => {
-  const data = { products: [], customers: [], orders: [], brands: brandList };
+// Get content from file
+const filePath = process.cwd() + "\\src/db.json";
+var contents = fs.readFileSync(filePath);
+// Define to JSON type
+var jsonContent = JSON.parse(contents);
 
-  // Create 2000 products
+const products = () => {
+  const product = [];
   for (let i = 0; i < 2000; i++) {
     const title = faker.commerce.product();
     const price = faker.commerce.price();
@@ -99,7 +104,7 @@ module.exports = () => {
     );
     const brand = brandList[chosenBrand]; // pick a random brand from the brands array with  ranging from 0 to the length of the brands array
     const brandName = (id) => brandList.find((brand) => brand.id === id)?.name;
-    data.products.push({
+    product.push({
       id: i + 1,
       title,
       price,
@@ -109,7 +114,11 @@ module.exports = () => {
       brandName: brandName(brand.id),
     });
   }
+  return product;
+};
 
+const users = () => {
+  const user = [];
   // Create 50 users
   for (let i = 0; i < 50; i++) {
     const name = faker.name.firstName();
@@ -120,7 +129,7 @@ module.exports = () => {
     const zip = faker.address.zipCode();
     const phone = faker.phone.number();
     const country = faker.address.country();
-    data.customers.push({
+    user.push({
       id: i + 1,
       name,
       email,
@@ -129,13 +138,19 @@ module.exports = () => {
     });
   }
 
+  return user;
+};
+
+const orders = () => {
+  const order = [];
+
   // create 300 orders
   for (let i = 0; i < 500; i++) {
     const customerId = faker.datatype.number({ min: 1, max: 50 });
     const productId = faker.datatype.number({ min: 1, max: 2000 });
     const quantity = faker.datatype.number({ min: 1, max: 10 });
     const price = faker.commerce.price();
-    data.orders.push({
+    order.push({
       id: i + 1,
       customerId,
       productId,
@@ -145,5 +160,29 @@ module.exports = () => {
     });
   }
 
+  return order;
+};
+
+const modified = {
+  ...jsonContent,
+  brands: brandList,
+  customers: users(),
+  orders: orders(),
+  products: products(),
+};
+
+// write to a new file named 2pac.txt
+fs.writeFile(filePath, JSON.stringify(modified, null, 2), (err) => {
+  // throws an error, you could also catch it here
+  if (err) throw err;
+});
+
+module.exports = () => {
+  const data = {
+    products: products(),
+    customers: users(),
+    orders: orders(),
+    brands: brandList,
+  };
   return data;
 };
