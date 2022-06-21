@@ -1,0 +1,17 @@
+{
+  "name": "admin-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "json-server  --watch index.js --port 5000  --no-cors",
+    "start": "json-server  index.js --port 5000  --no-cors"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^7.3.0",
+    "json-server": "^0.17.0"
+  }
+}
