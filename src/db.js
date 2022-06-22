@@ -99,11 +99,9 @@ const products = () => {
     const description = faker.commerce.productDescription();
     const image = faker.image.image();
 
-    const chosenBrand = Math.floor(
-      Math.random() * (brandList?.length ?? 10 + 1)
-    );
+    const chosenBrand = Math.floor(Math.random() * brandList.length);
     const brand = brandList[chosenBrand]; // pick a random brand from the brands array with  ranging from 0 to the length of the brands array
-    const brandName = (id) => brandList.find((brand) => brand.id === id)?.name;
+    const brandName = (id) => brandList.find((brand) => brand.id === id).name;
     product.push({
       id: i + 1,
       title,
