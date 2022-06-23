@@ -10,9 +10,8 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 
 const rules = auth.rewriter({
-  // Permission rules
-  products: 660,
-  brands: 440,
+  "/products*": "/660/products$1",
+  "/orders*": "/440/orders$1",
 });
 
 // You must apply the middlewares in the following order
