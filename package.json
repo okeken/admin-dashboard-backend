@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "json-server  --watch src/db.js --port 5000  --no-cors",
-    "start": "node  src/db.js  && node src/index.js"
+    "dev": "json-server --watch src/index.js -m ./node_modules/json-server-auth --port 5000  --no-cors -r src/routes.json",
+    "start": "node  src/index.js  && json-server src/db.json -m ./node_modules/json-server-auth  --port 5000  --no-cors -r src/routes.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^7.3.0",
-    "json-server": "^0.17.0"
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0"
   }
 }

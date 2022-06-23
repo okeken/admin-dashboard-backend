@@ -1,0 +1,4 @@
+{
+    "/products*": "/660/products$1",
+    "/orders*": "/440/orders$1"
+  }
