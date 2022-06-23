@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "json-server --watch src/index.js -m ./node_modules/json-server-auth --port 5000  --no-cors -r src/routes.json",
-    "start": "node  src/index.js  && json-server src/db.json -m ./node_modules/json-server-auth  --port 5000  --no-cors -r src/routes.json"
+    "start": "node  src/index.js  && json-server src/db.json -m ./node_modules/json-server-auth  --port 5000  --no-cors -r src/routes.json",
+    "build":"node  src/index.js  && node src/app.js  --no-cors"
   },
   "keywords": [],
   "author": "",
